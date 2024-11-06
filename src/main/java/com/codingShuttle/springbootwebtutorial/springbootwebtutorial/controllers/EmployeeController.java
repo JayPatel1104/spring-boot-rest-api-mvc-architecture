@@ -4,6 +4,7 @@ package com.codingShuttle.springbootwebtutorial.springbootwebtutorial.controller
 import com.codingShuttle.springbootwebtutorial.springbootwebtutorial.dto.EmployeeDTO;
 import com.codingShuttle.springbootwebtutorial.springbootwebtutorial.entities.EmployeeEntitiy;
 import com.codingShuttle.springbootwebtutorial.springbootwebtutorial.repositories.EmployeeRepository;
+import com.codingShuttle.springbootwebtutorial.springbootwebtutorial.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -17,26 +18,24 @@ public class EmployeeController {
 //    public String getMySuperSecrectMessage(){
 //        return "Secret Message: Namaste";
 //    }
-private final EmployeeRepository employeeRepository;
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
-
-
-
     @GetMapping("/{employeeId}")
-    public EmployeeEntitiy getEmployeeById(@PathVariable(name = "employeeId") Long id){
-        return employeeRepository.findById(id).orElse(null);
+    public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id){
+        return employeeService.getEmployeeById(id);
     }
 
     @GetMapping()
-    public List<EmployeeEntitiy> getAllEmployees(@RequestParam(required = false) Integer age){
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> getAllEmployees(@RequestParam(required = false) Integer age){
+        return employeeService.getAllEmployees();
     }
 
     @PostMapping()
-    public EmployeeEntitiy createNewEmployee(@RequestBody EmployeeEntitiy inputEmployee){
-        return employeeRepository.save(inputEmployee);
+    public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee){
+        return employeeService.createNewEmployee(inputEmployee);
     }
 }
