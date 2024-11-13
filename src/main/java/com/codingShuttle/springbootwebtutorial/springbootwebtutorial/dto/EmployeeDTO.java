@@ -38,16 +38,16 @@ public class EmployeeDTO {
     @EmployeeRoleValidation
     private String role;
 
-    @NotNull(message = "Salary of employee cannot be null")
-    @Positive(message = "Salary should be positve")
-    @Digits(integer = 6, fraction = 2, message = "Salary should be only 6 digit integer and 2 digit fraction")
-    private Double salary;
+//    @NotNull(message = "Salary of employee cannot be null")
+//    @Positive(message = "Salary should be positve")
+//    @Digits(integer = 6, fraction = 2, message = "Salary should be only 6 digit integer and 2 digit fraction")
+//    private Double salary;
 
     @PastOrPresent(message = "Date of Joining should be")
     private LocalDate dateOfJoining;
 
-    @PrimeNumberValidation
-    private Integer inputNumber;
+//    @PrimeNumberValidation
+//    private Integer inputNumber;
 
     @JsonProperty("isActive")
     private Boolean isActive;
